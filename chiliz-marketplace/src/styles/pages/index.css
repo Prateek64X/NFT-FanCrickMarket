@@ -1,0 +1,80 @@
+body {
+    background-color: #090909;
+}
+
+.background-container {
+    padding-bottom: 12pt;
+    margin: 12pt 12pt 12pt 12pt;
+    border-radius: 12pt;
+    background-color: #1A1A1A;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-container {
+    width: calc(97% - 36pt);
+    height: calc(10% - 36pt);
+    padding: 12pt;
+    margin: 20pt 20pt;
+    border-radius: 12pt;
+    background-color: #000000;
+    position: relative;
+    overflow: hidden;
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    transition: padding 0.3s ease;
+}
+
+.banner {
+    width: 100%; /* Fill the container */
+    height: 100%; /* Fill the container */
+    object-fit: cover; /* Ensure the image covers the container */
+    border-radius: 12pt;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.banner:hover {
+    transform: scale(1.06); /* Slightly scale up the image on hover */
+}
+
+
+.card-grid {
+    display: grid;
+    gap: 16px;
+}
+  
+.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+.grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+.grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+.grid-cols-5 {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.footer {
+    width: 100%;
+    background-color: #170022;
+    color: #ECDBF2;
+    text-align: center;
+    padding-top: 12pt;
+    padding-bottom: 12pt;
+    position: relative;
+    bottom: 0;
+    font-size: 20px;
+}
+
+.gradient-line-top {
+    height: 4px;
+    background: linear-gradient(90deg, #FF1256, #610287);
+    width: 101%;
+    position: absolute;
+    top: 0;
+    left: -8pt;
+}
