@@ -1,4 +1,6 @@
+'use client';
 import React from 'react';
+import { useRouter } from 'next/navigation'; // Import from 'next/navigation'
 import { FaStar, FaTrophy, FaFlag } from 'react-icons/fa';
 import "../../styles/components/fantoken-card.css";
 
@@ -15,17 +17,28 @@ function FantokenCard(props) {
       listing_count
     } = props;
 
+    const router = useRouter(); // Initialize useRouter
+
     // Get rarity text from value
-    var rarity_type = getRarityText(rarity_value)
+    var rarity_type = getRarityText(rarity_value);
     const gradientColors = getGradientColors(rarity_type);
     const gradientStyle = {
         backgroundImage: `linear-gradient(90deg, ${gradientColors[0]}, ${gradientColors[1]})`,
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent'
     };
-    
+
+    // Handle card click
+    const handleClick = () => {
+        const queryString = new URLSearchParams({
+            title, subtitle, rarity_value, rarity_type, skill, country, price_lowest, listing_count
+        }).toString();
+
+        router.push(`/FantokenPage?${queryString}`);
+    };
+
     return (
-        <div className='card'>
+        <div className='card' onClick={handleClick} style={{ cursor: 'pointer' }}>
             <div className='card-header'>
                 <div className='rarity-info-header'>
                     <p>Rarity</p>
@@ -36,7 +49,7 @@ function FantokenCard(props) {
                 <h1>{title}</h1>
                 <h2>{subtitle}</h2>
             </div>
-            <div className='card-grid'>
+            <div className='grid-item-row'>
                 <div className='grid-item'>
                     <div className='grid-item-row'>
                         <FaStar className='icon' size={24} />
@@ -94,7 +107,6 @@ function getRarityText(rarity_value) {
         return 'common';
     }
 }
-
 
 function getGradientColors(rarity) {
     switch (rarity.toLowerCase()) {

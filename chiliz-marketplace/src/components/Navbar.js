@@ -1,15 +1,18 @@
-import { useRef } from "react";
+"use client";
+
+import Link from 'next/link';
+import { useState } from 'react';
 import Image from "next/image";
 import "../styles/components/navbar.css";
 import { CiSearch } from "react-icons/ci";
 
-function Navbar() {
-    const navRef = useRef();
-
-    const showNavbar = () => {
-        navRef.current.classList.toggle("responsive_nav");
+const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false);
+  
+    const toggleMenu = () => {
+      setIsOpen(!isOpen);
     };
-
+  
     return (
         <div className="navbar-body">
             {/* Left: Chilliz Logo */}
@@ -45,7 +48,7 @@ function Navbar() {
             {/* Bottom: Gradient line */}
             <div className="gradient-line"></div>
         </div>
-    );
-}
+  );
+};
 
 export default Navbar;

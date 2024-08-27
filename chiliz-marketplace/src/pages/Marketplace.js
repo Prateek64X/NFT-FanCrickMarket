@@ -1,17 +1,17 @@
 // /src/pages/index.js
-import Image from "next/image";
+"use client";
 
 import React from 'react';
 import GridLayout from 'react-grid-layout';
-import "../styles/pages/index.css";
-import 'react-grid-layout/css/styles.css';
-import 'react-resizable/css/styles.css';
-
-import Navbar from "@/components/Navbar";
 import FantokenCard from "@/components/card/FantokenCard";
 import FantokenCardPropsList from "@/components/card/FantokenCardPropsList";
 
-export default function Home() {
+import "../styles/pages/Marketplace.css";
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
+
+
+export default function Marketplace() {
   var columns = 5;
   const cardWidth = 440;
   const cardHeight = 620;
@@ -25,9 +25,8 @@ export default function Home() {
   }));
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Navbar />
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+    <main className="flex min-h-screen flex-col p-0">
+      <div className="w-full flex flex-col">
         <div className="background-container">
           <div className="banner-container">
             <img className="banner" src="/assets/images/banner.jpg" alt="Banner" />
