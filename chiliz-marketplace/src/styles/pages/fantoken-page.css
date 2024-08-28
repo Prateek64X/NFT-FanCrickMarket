@@ -1,33 +1,110 @@
+body {
+    background-color: #090909;
+}
+
 .fantoken-page {
+    margin: 20pt 16pt 16pt 16pt;
+    height: calc(100vh - 140pt);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding: 20pt;
+    border-radius: 20pt;
     background-color: #1f1f1f;
     color: white;
 }
 
+.fantoken-content {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    max-width: 1200px; /* Optional, to limit the width */
+}
+
+.image-container {
+    position: relative;
+    width: 40%;
+    aspect-ratio: 1;
+    height: 100%;
+    border-radius: 20pt;
+    overflow: hidden;
+}
+
+.image-container img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.info-container {
+    margin-left: 20pt; /* Adjusted for better spacing */
+    width: 60%; /* Adjusted for full width on the right */
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+}
+
 .fantoken-info {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row; /* Change to column layout */
     margin-top: 20pt;
     width: 100%;
 }
 
 .fantoken-stat {
-    background-color: #2c2c2c;
-    padding: 20pt;
+    background-color: #3a3a3a; /* Adjusted for better readability */
+    padding: 15pt;
     border-radius: 8pt;
     text-align: center;
+    font-size: 14pt;
+    margin-right: 20pt;
+    width: 120pt;
+    height: 80pt;
+}
+
+.fantoken-stat-footer {
+    background-color: #3a3a3a; /* Adjusted for better readability */
+    padding: 15pt;
+    border-radius: 8pt;
+    text-align: center;
+    font-size: 14pt;
+    margin-right: 20pt;
+    margin-top: 20pt;
+    font-size: 20pt;
+    width: 290pt;
+    height: 80pt;
+}
+
+.fantoken-stat span {
+    font-size: 16pt;
+}
+
+.low-bid {
+    color: lightcyan;
+}
+
+.high-bid {
+    color: lightpink;
+}
+
+.fantoken-stat p {
+    font-size: 24pt;
+}
+
+.fantoken-stat:nth-child(2) {
+    margin-bottom: 0; /* Remove margin from the second stat */
 }
 
 .buy-button {
     background: linear-gradient(90deg, #3a99d8, #8f22d1);
     padding: 10pt 20pt;
     border: none;
-    border-radius: 8pt;
+    border-radius: 50pt; /* Corner radius of 50pt */
     color: white;
     margin-top: 20pt;
+    width: 320pt;
+    height: 48pt;
+    font-size: 16pt;
     cursor: pointer;
     transition: background 0.3s;
 }

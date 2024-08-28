@@ -1,6 +1,8 @@
 'use client';
 import React from 'react';
-import { useRouter } from 'next/navigation'; // Import from 'next/navigation'
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Image from "next/image";
 import { FaStar, FaTrophy, FaFlag } from 'react-icons/fa';
 import "../../styles/components/fantoken-card.css";
 
@@ -10,6 +12,7 @@ function FantokenCard(props) {
     const {
       title,
       subtitle,
+      img,
       rarity_value,
       skill,
       country,
@@ -25,13 +28,16 @@ function FantokenCard(props) {
     const gradientStyle = {
         backgroundImage: `linear-gradient(90deg, ${gradientColors[0]}, ${gradientColors[1]})`,
         WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent'
+        WebkitTextFillColor: 'transparent',
     };
+
+    // Check Image
+    var imgCorrected = getCheckedImage(img);
 
     // Handle card click
     const handleClick = () => {
         const queryString = new URLSearchParams({
-            title, subtitle, rarity_value, rarity_type, skill, country, price_lowest, listing_count
+            title, subtitle, img, rarity_value, rarity_type, skill, country, price_lowest, listing_count
         }).toString();
 
         router.push(`/FantokenPage?${queryString}`);
@@ -39,10 +45,10 @@ function FantokenCard(props) {
 
     return (
         <div className='card' onClick={handleClick} style={{ cursor: 'pointer' }}>
-            <div className='card-header'>
+            <div className='card-header' style={{ backgroundImage: `url(/assets/images/PlayerCards/${imgCorrected})` }}>
                 <div className='rarity-info-header'>
-                    <p>Rarity</p>
-                    <p style={gradientStyle}>{rarity_value}</p>
+                    <p className="rarity-text">Rarity</p>
+                    <p className="gradient-p" style={gradientStyle}>{rarity_value}</p>
                 </div>
             </div>
             <div className='card-title'>
@@ -122,5 +128,16 @@ function getGradientColors(rarity) {
             return ['#CACACA', '#DEDEDE'];
     }
 }
+
+function getCheckedImage(img) {
+    const validExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.webp'];
+    const isValid = validExtensions.some((ext) => img.toLowerCase().endsWith(ext));
+    if (isValid) {
+        return img;
+    } else {
+        console.error('Invalid image format! Please use a valid extension. Defaulting to .Png.');
+        return img+".png";
+    }
+  }  
 
 export default FantokenCard;

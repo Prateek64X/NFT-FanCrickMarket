@@ -43,6 +43,7 @@ export default function Marketplace() {
               <FantokenCard 
                 title={"Virat"} 
                 subtitle={"Kohli"}
+                img={"viratkohli.png"}
                 rarity_value={1950}
                 skill={"Batsman"}
                 country={"India"}

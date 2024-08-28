@@ -31,24 +31,41 @@
     aspect-ratio: 1;
     width: 100%;
     box-sizing: border-box;
+    position: relative;
+    overflow: hidden; /* Ensures any overflow is hidden */
+    background-size: cover; /* Ensures the image covers the entire card-header */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents repeating the background image */
 }
 
 .rarity-info-header {
+    position: relative;
     text-align: right;
-    font-size: 9pt;
-    padding: 0; /* Removed negative padding */
-    line-height: 1.2; /* Reduced line-height to decrease vertical spacing */
-    color: #4A4A4A;
+    font-size: 13pt; /* Increased by 4pt */
+    line-height: 1.2;
+    color: white; /* Text color set to white */
+    z-index: 1;
+    font-weight: bold;
 }
 
-.rarity-info-header p {
+.rarity-text {
     margin: 0;
+    padding: 2pt 0pt;
+    display: inline-block;
+    font-size: 10pt; 
+    text-shadow:
+        1px 1px 1px rgba(0, 0, 0, 0.2), 
+        -1px -1px 1px rgba(0, 0, 0, 0.2),
+        1px -1px 1px rgba(0, 0, 0, 0.2),
+        -1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-.rarity-info-header p:last-child {
-    font-size: 12pt; 
-    margin-top: 4pt;
-    color: #617AFF;
+.gradient-p {
+    margin: 0;
+    padding: 2pt 0pt;
+    font-size: 16pt; 
+    margin-top: -2pt;
+    color: transparent;
 }
 
 .card-title {
