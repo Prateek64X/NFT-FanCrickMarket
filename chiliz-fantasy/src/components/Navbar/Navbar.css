@@ -1,0 +1,125 @@
+
+.navbar-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px; 
+    padding: 0 12pt 4pt 0;
+    background-color: transparent;
+    position: relative; 
+}
+
+.navbar-item {
+    display: flex; 
+    align-items: center; 
+    padding: 12pt 12pt;
+    box-sizing: border-box; 
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    background-color: #1D1D1D;
+    border-radius: 30px;
+    width: 360px;
+    height: calc(100% - 12pt); 
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0 8pt; 
+    box-sizing: border-box; 
+    transition: width 0.3s ease; 
+}
+
+.searchbar:hover,
+.searchbar:focus-within {
+    width: 560px;
+}
+
+.search-icon {
+    width: 36px;
+    height: 36px;
+}
+
+.searchbar input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    width: 100%;
+    height: 100%;
+    font-size: 18px; 
+    text-align: center; 
+    box-sizing: border-box;
+}
+
+.searchbar input::placeholder {
+    color: #888;
+}
+
+.search-icon {
+    width: 36px;
+    height: 36px;
+}
+
+.searchbar input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    width: 100%;
+    height: 100%; 
+    font-size: 18px; 
+    text-align: center; 
+    box-sizing: border-box;
+
+}
+
+.searchbar input::placeholder {
+    color: #888;
+}
+
+
+.connect-button {
+    background-image: linear-gradient(90deg, #FF1256, #610287);
+    border-radius: 30pt;
+    border: none;
+    height: calc(100% - 12pt); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer; 
+    transition: filter 0.3s ease;
+}
+
+.connect-button:hover {
+    filter: brightness(150%);
+}
+
+.gradient-line {
+    height: 4px;
+    background: linear-gradient(90deg, #FF1256, #610287);
+    width: 100.5%;
+    position: absolute;
+    bottom: 0;
+    left: -8pt;
+}
+
+.text-gradient {
+    margin-left: 8pt;
+    margin-right: 8pt;
+    background: linear-gradient(to right, #FF1256, #610287);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.centered-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

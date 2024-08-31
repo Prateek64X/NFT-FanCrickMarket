@@ -1,0 +1,49 @@
+.contest-card {
+    padding: 1.5rem;
+    background-color: #090909;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    position: relative;
+  }
+  
+  .contest-card:hover {
+    background-color: #1D1D1D;
+    transform: scale(1.02);
+    border-bottom: 4px solid #ED1B2F;
+  }
+  
+  .prize-pool {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .amount {
+    color: #ED1B2F;
+  }
+  
+  .spots-info {
+    color: #bbb;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .enter-button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(to right, #FF5A5F, #FF2D55);
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  
+  .enter-button:hover {
+    transform: scale(1.02);
+    background: linear-gradient(to right, #ff5157, #ff2d73);
+  }

@@ -1,0 +1,62 @@
+.contests-page {
+  padding: 2rem;
+  background-color: #000;
+  color: white;
+  min-height: 100vh;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.contests-container {
+  background-color: #141414;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+ 
+  margin: 0 auto;
+}
+
+/* Grid System */
+.grid-item-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 0.5rem; /* Adjust as needed */
+}
+
+.grid-item {
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: start; /* Align text to the start */
+}
+
+.grid-item h3 {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.grid-item span {
+  font-size: 1.4rem;
+}
+
+.grid-seperator {
+  margin-top: 1.5rem;
+}
+
+.card-section {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.runner-up-contests {
+  display: flex;
+  gap: 1rem;
+}

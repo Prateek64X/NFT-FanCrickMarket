@@ -1,0 +1,17 @@
+/* MatchCard Hover and Active Effects */
+.card {
+    background-color: #090909;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    background-color: #1d1d1d;
+    transform: scale(1.04);
+    border-bottom: 4px solid #ED1B2F;
+  }
+  
+  .card:active {
+    background-color: #323232;
+    transform: scale(1.05);
+  }
+  

@@ -1,0 +1,41 @@
+body {
+  background-color: #121212;
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.3s, font-size 0.3s;
+}
+
+.group {
+  position: relative;
+}
+
+.group:hover,
+.group:focus {
+  color: #ED1B2F;
+  font-size: 1.125rem; /* Text size increased by 2 units */
+  transition: color 0.3s, font-size 0.3s; /* Smooth transition for color and size */
+}
+
+.group:hover .absolute,
+.group:focus .absolute {
+  width: 100%; /* Show underline on hover */
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.tab-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 20px; /* Adjusted height for a thinner line */
+  background-color: #ED1B2F;
+  transition: transform 0.3s ease;
+}
