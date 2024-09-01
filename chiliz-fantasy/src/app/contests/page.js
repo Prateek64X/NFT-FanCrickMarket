@@ -5,14 +5,14 @@ import { useSearchParams } from "next/navigation";
 import ContestCard from "@/components/ContestCard/ContestCard";
 import "./page.css";
 
-export default function ContestsPage() {
+export default function TeamPage() {
   const searchParams = useSearchParams();
+  const timeRemaining = searchParams.get("timeRemaining");
+  const matchId = searchParams.get("matchName");
   const matchName = searchParams.get("matchName");
   const matchDate = searchParams.get("matchDate");
   const team1 = searchParams.get("team1");
   const team2 = searchParams.get("team2");
-  const timeRemaining = searchParams.get("timeRemaining");
-  
 
   return (
     <div className="contests-page">
@@ -39,15 +39,15 @@ export default function ContestsPage() {
         <section className="grid-seperator">
           <h2 className="section-title">Super Shot Contests</h2>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-            <ContestCard contestType="Super Shot" prizePool="$200000" spotsRemaining={500} totalSpots={2000} />
+            <ContestCard contestId="CI0001" prizePool="$200000" spotsRemaining={500} totalSpots={2000} contestType="Super Shot" matchId={matchId} matchName={matchName} team1={team1} team2={team2} />
           </div>
         </section>
 
         <section className="runner-up-section">
           <h2 className="section-title">Runner Up Contests</h2>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-            <ContestCard contestType="Runner Up" prizePool="$5000" spotsRemaining={65} totalSpots={850} />
-            <ContestCard contestType="Runner Up" prizePool="$3500" spotsRemaining={120} totalSpots={500} />
+            <ContestCard contestId="CI0002" prizePool="$5000" spotsRemaining={65} totalSpots={850} matchId={matchId} matchName={matchName} team1={team1} team2={team2}/>
+            <ContestCard contestId="CI0003" prizePool="$3500" spotsRemaining={120} totalSpots={500} matchId={matchId} matchName={matchName} team1={team1} team2={team2}/>
           </div>
         </section>
       </div>

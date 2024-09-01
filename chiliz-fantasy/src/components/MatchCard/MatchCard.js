@@ -10,7 +10,7 @@ export default function MatchCard({ matchId, matchName, matchDate, team1, team2,
   const [isActive, setIsActive] = useState(false);
   const router = useRouter(); // Initialize useRouter
 
-  // Handle card click to navigate to ContestsPage
+  // Handle card click to navigate to TeamPage
   const handleClick = () => {
     // Build query string with match details
     const queryString = new URLSearchParams({
@@ -22,7 +22,7 @@ export default function MatchCard({ matchId, matchName, matchDate, team1, team2,
       timeRemaining,
     }).toString();
 
-    // Navigate to ContestsPage with query parameters
+    // Navigate to TeamPage with query parameters
     router.push(`/contests?${queryString}`); // Adjust path to match your actual routing
   };
 

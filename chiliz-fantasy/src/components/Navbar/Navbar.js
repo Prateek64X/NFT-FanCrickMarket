@@ -19,7 +19,7 @@ const Navbar = () => {
             <Link href="/">
                 <div className="centered-content navbar-item">
                         <Image
-                            src="/assets/images/ChillizCrickLogo.png"
+                            src="/assets/images/ChillizFantasyLogo.png"
                             alt="Chilliz Logo"
                             width={48}
                             height={48}
@@ -35,10 +35,10 @@ const Navbar = () => {
                 <CiSearch size={36} />
                 <input
                     type="text"
-                    placeholder="Search Fantokens"
+                    placeholder="Search Players"
                     className="searchbar-text"
                     onFocus={(e) => (e.target.placeholder = "")}
-                    onBlur={(e) => (e.target.placeholder = "Search Fantokens")}
+                    onBlur={(e) => (e.target.placeholder = "Search Players")}
                 />
             </div>
 

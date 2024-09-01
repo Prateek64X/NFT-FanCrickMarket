@@ -1,0 +1,163 @@
+.card {
+    width: calc(100% - 36pt);
+    height: calc(100% - 36pt);
+    border-radius: 12pt;
+    background-color: #000;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    box-shadow: 0 4pt 8pt rgba(0, 0, 0, 0.3);
+    margin: 12pt;
+    padding: 12pt;
+    display: flex;
+    flex-direction: column;
+    gap: 12pt;
+    transition: width 0.3s ease, height 0.3s ease, margin 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    width: calc(100% - 28pt);
+    height: calc(100% - 24pt);
+    margin: 8pt;
+    box-shadow: 0 8pt 16pt rgba(0, 0, 0, 0.5);
+}
+
+.card-header {
+    background-color: #1A1A1A;
+    border-radius: 12pt;
+    padding: 12pt;
+    display: flex;
+    justify-content: flex-end;
+    aspect-ratio: 1;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden; /* Ensures any overflow is hidden */
+    background-size: cover; /* Ensures the image covers the entire card-header */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents repeating the background image */
+}
+
+.rarity-info-header {
+    position: relative;
+    text-align: right;
+    font-size: 13pt; /* Increased by 4pt */
+    line-height: 1.2;
+    color: white; /* Text color set to white */
+    z-index: 1;
+    font-weight: bold;
+}
+
+.rarity-text {
+    margin: 0;
+    padding: 2pt 0pt;
+    display: inline-block;
+    font-size: 10pt; 
+    text-shadow:
+        1px 1px 1px rgba(0, 0, 0, 0.2), 
+        -1px -1px 1px rgba(0, 0, 0, 0.2),
+        1px -1px 1px rgba(0, 0, 0, 0.2),
+        -1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.gradient-p {
+    margin: 0;
+    padding: 2pt 0pt;
+    font-size: 16pt; 
+    margin-top: -2pt;
+    color: transparent;
+}
+
+.card-title {
+    text-align: center;
+    margin: 0;
+}
+
+.card-title h1 {
+    font-size: 24pt; 
+    margin: 0;
+}
+
+.card-title h2 {
+    font-size: 26pt; 
+    margin: 0;
+    color: #989898;
+}
+
+.card-grid {
+    display: flex;
+    justify-content: space-around;
+    padding: 4pt;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.grid-item-row {
+    display: flex;
+    align-items: center;
+    gap: 4pt; 
+    justify-content: space-around;
+    width: 100%;
+}
+
+.grid-item h3 {
+    font-size: 9pt;
+    margin: 0;
+}
+
+.grid-item p {
+    font-size: 10.5pt;
+    margin: 2pt 0 0 0; 
+    color: #4A4A4A;
+}
+
+.icon {
+    font-size: 18pt; 
+    margin-bottom: 3pt; 
+    color: #4A4A4A;
+}
+
+.card-button {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 12pt;
+    background: linear-gradient(90deg, #610287, #212867);
+    border-radius: 12pt;
+    color: white;
+    font-size: 10.5pt;
+    margin-top: auto;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+}
+
+.card-button:hover {
+    filter: brightness(150%);
+}
+
+.button-right, .button-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.button-left {
+    align-items: flex-start; /* Align text items to the start */
+}
+
+.card-button h4, .card-button span {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.price-info, .listing-info {
+    text-align: center;
+}
