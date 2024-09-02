@@ -1,26 +1,55 @@
 .card {
+    position: relative; 
     width: calc(100% - 36pt);
     height: calc(100% - 36pt);
-    border-radius: 12pt;
-    background-color: #000;
+    border-radius: 12pt; 
+    background-color: #000; 
     color: white;
     font-family: Arial, sans-serif;
-    overflow: hidden;
+    overflow: hidden; 
     box-shadow: 0 4pt 8pt rgba(0, 0, 0, 0.3);
     margin: 12pt;
     padding: 12pt;
     display: flex;
     flex-direction: column;
     gap: 12pt;
-    transition: width 0.3s ease, height 0.3s ease, margin 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+    transition: 
+        width 0.3s ease, 
+        height 0.3s ease, 
+        margin 0.3s ease, 
+        padding 0.3s ease, 
+        background-color 0.5s ease, 
+        transform 0.3s ease;
+    box-sizing: border-box; 
 }
 
 .card:hover {
     width: calc(100% - 28pt);
-    height: calc(100% - 24pt);
+    height: calc(100% - 28pt);
     margin: 8pt;
-    box-shadow: 0 8pt 16pt rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
 }
+
+.card.selected {
+    transform: scale(1.05); 
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0; 
+    border-radius: 12pt; 
+    padding: 4px; 
+    background: linear-gradient(90deg, #B872FF, #1E3FEF); 
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; 
+            mask-composite: exclude; 
+    pointer-events: none; 
+    z-index: -1; 
+}
+
 
 .card-header {
     background-color: #1A1A1A;
@@ -32,18 +61,18 @@
     width: 100%;
     box-sizing: border-box;
     position: relative;
-    overflow: hidden; /* Ensures any overflow is hidden */
-    background-size: cover; /* Ensures the image covers the entire card-header */
-    background-position: center; /* Centers the background image */
-    background-repeat: no-repeat; /* Prevents repeating the background image */
+    overflow: hidden; 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
 }
 
 .rarity-info-header {
     position: relative;
     text-align: right;
-    font-size: 13pt; /* Increased by 4pt */
+    font-size: 13pt; 
     line-height: 1.2;
-    color: white; /* Text color set to white */
+    color: white; 
     z-index: 1;
     font-weight: bold;
 }
@@ -90,7 +119,7 @@
     padding: 4pt;
 }
 
-.grid-item {
+.player-card-item {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -98,7 +127,7 @@
     text-align: center;
 }
 
-.grid-item-row {
+.player-card-attributes {
     display: flex;
     align-items: center;
     gap: 4pt; 
@@ -106,12 +135,12 @@
     width: 100%;
 }
 
-.grid-item h3 {
+.player-card-item h3 {
     font-size: 9pt;
     margin: 0;
 }
 
-.grid-item p {
+.player-card-item p {
     font-size: 10.5pt;
     margin: 2pt 0 0 0; 
     color: #4A4A4A;
@@ -150,7 +179,7 @@
 }
 
 .button-left {
-    align-items: flex-start; /* Align text items to the start */
+    align-items: flex-start; 
 }
 
 .card-button h4, .card-button span {

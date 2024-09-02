@@ -18,19 +18,25 @@
  
   margin: 0 auto;
 }
-
 /* Grid System */
-.grid-item-row {
+.grid-item-row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  margin-bottom: 0.5rem; /* Adjust as needed */
+  margin-bottom: 0.5rem;
+}
+
+.grid-item-row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .grid-item {
   display: flex;
-  align-items: center; /* Center vertically */
-  justify-content: start; /* Align text to the start */
+  align-items: center;
+  justify-content: start;
 }
 
 .grid-item h3 {
@@ -46,6 +52,7 @@
   margin-top: 1.5rem;
 }
 
+
 .card-section {
   margin-bottom: 2rem;
 }
@@ -59,4 +66,8 @@
 .runner-up-team {
   display: flex;
   gap: 1rem;
+}
+
+.text-heading-24 span {
+  font-size: 24pt;
 }

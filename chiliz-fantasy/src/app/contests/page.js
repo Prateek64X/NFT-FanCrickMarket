@@ -8,11 +8,13 @@ import "./page.css";
 export default function TeamPage() {
   const searchParams = useSearchParams();
   const timeRemaining = searchParams.get("timeRemaining");
-  const matchId = searchParams.get("matchName");
+  const matchId = searchParams.get("matchId");
   const matchName = searchParams.get("matchName");
   const matchDate = searchParams.get("matchDate");
   const team1 = searchParams.get("team1");
   const team2 = searchParams.get("team2");
+  const country1 = searchParams.get("country1");
+  const country2 = searchParams.get("country2");
 
   return (
     <div className="contests-page">
@@ -43,7 +45,7 @@ export default function TeamPage() {
           </div>
         </section>
 
-        <section className="runner-up-section">
+        <section className="runner-up-section grid-seperator">
           <h2 className="section-title">Runner Up Contests</h2>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
             <ContestCard contestId="CI0002" prizePool="$5000" spotsRemaining={65} totalSpots={850} matchId={matchId} matchName={matchName} team1={team1} team2={team2}/>

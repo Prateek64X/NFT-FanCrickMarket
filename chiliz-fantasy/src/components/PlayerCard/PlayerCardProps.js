@@ -1,7 +1,8 @@
 // PlayerCardProps.js
 export default class PlayerCardProps {
   
-    constructor(title, subtitle, img, rarity_value, skill, country, price_lowest, listing_count) {
+    constructor(playerId, title, subtitle, img, rarity_value, skill, country, price_lowest, listing_count) {
+      this.playerId = playerId;
       this.title = title;
       this.subtitle = subtitle;
       this.img = img;

@@ -1,29 +1,33 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import Image from "next/image";
 import { FaStar, FaTrophy, FaFlag } from 'react-icons/fa';
 import "./PlayerCard.css";
+import MatchCardPropsList from "@/components/MatchCard/MatchCardPropsList"; 
 
 var rarity_highest = 2000;
 
 function PlayerCard(props) {
     const {
-      title,
-      subtitle,
-      img,
-      rarity_value,
-      skill,
-      country,
-      price_lowest,
-      listing_count
+        playerId,
+        title,
+        subtitle,
+        img,
+        rarity_value,
+        skill,
+        country,
+        price_lowest,
+        listing_count,
+        matchId,
+        onSelect,
+        selected
     } = props;
 
-    const router = useRouter(); // Initialize useRouter
+    const router = useRouter();
 
     // Get rarity text from value
-    var rarity_type = getRarityText(rarity_value);
+    const rarity_type = getRarityText(rarity_value);
     const gradientColors = getGradientColors(rarity_type);
     const gradientStyle = {
         backgroundImage: `linear-gradient(90deg, ${gradientColors[0]}, ${gradientColors[1]})`,
@@ -32,20 +36,21 @@ function PlayerCard(props) {
     };
 
     // Check Image
-    var imgCorrected = getCheckedImage(img);
+    const imgCorrected = getCheckedImage(img);
 
-    // // Handle card click
-    // const handleClick = () => {
-    //     const queryString = new URLSearchParams({
-    //         title, subtitle, img, rarity_value, rarity_type, skill, country, price_lowest, listing_count
-    //     }).toString();
-
-    //     router.push(`/PlayerPage?${queryString}`);
-    // };
+    // Handle card click
+    const handleClick = () => {
+        if (onSelect) {
+            onSelect(playerId);
+        }
+    };
 
     return (
-        <div className='card' style={{ cursor: 'pointer' }}>
-            <div className='card-header' style={{ backgroundImage: `url(/assets/images/PlayerCards/${imgCorrected})` }}>
+        <div 
+            className={`card ${selected ? 'selected' : ''}`} 
+            onClick={handleClick}
+        >
+            <div className='card-header' style={{ backgroundImage: `url(/images/PlayerCards/${imgCorrected})` }}>
                 <div className='rarity-info-header'>
                     <p className="rarity-text">Rarity</p>
                     <p className="gradient-p" style={gradientStyle}>{rarity_value}</p>
@@ -55,31 +60,31 @@ function PlayerCard(props) {
                 <h1>{title}</h1>
                 <h2>{subtitle}</h2>
             </div>
-            <div className='grid-item-row'>
-                <div className='grid-item'>
-                    <div className='grid-item-row'>
+            <div className='player-card-attributes'>
+                <div className='player-card-item'>
+                    <div className='player-card-attributes'>
                         <FaStar className='icon' size={24} />
                         <h3>Rarity</h3>
                     </div>
-                    <div className='grid-item-row'>
+                    <div className='player-card-attributes'>
                         <span style={gradientStyle}>{rarity_type.toUpperCase()}</span>
                     </div>
                 </div>
-                <div className='grid-item'>
-                    <div className='grid-item-row'>
+                <div className='player-card-item'>
+                    <div className='player-card-attributes'>
                         <FaTrophy className='icon' size={24} />
                         <h3>Skill</h3>
                     </div>
-                    <div className='grid-item-row'>
+                    <div className='player-card-attributes'>
                         <span>{skill}</span>
                     </div>
                 </div>
-                <div className='grid-item'>
-                    <div className='grid-item-row'>
+                <div className='player-card-item'>
+                    <div className='player-card-attributes'>
                         <FaFlag className='icon' size={24} />
                         <h3>Country</h3>
                     </div>
-                    <div className='grid-item-row'>
+                    <div className='player-card-attributes'>
                         <span>{country}</span>
                     </div>
                 </div>
@@ -94,6 +99,7 @@ function PlayerCard(props) {
                     <span>{listing_count}</span>
                 </div>
             </button>
+            <input type='hidden' id='playerId' value={playerId}></input>
         </div>
     );
 }
@@ -138,6 +144,6 @@ function getCheckedImage(img) {
         console.error('Invalid image format! Please use a valid extension. Defaulting to .Png.');
         return img+".png";
     }
-  }  
+}
 
 export default PlayerCard;

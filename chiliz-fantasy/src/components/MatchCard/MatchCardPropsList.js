@@ -16,6 +16,8 @@ const allMatches = [
         team2Image: "/images/teams/pak-nat.png",
         timeRemaining: "3d 2h",
         type: matchType[0],
+        country1: "India",
+        country2: "Pakistan"
     },
     {
       matchId: "C0002",
@@ -27,6 +29,8 @@ const allMatches = [
       team2Image: "/images/teams/csk.png",
       timeRemaining: "3h 09m",
       type: matchType[0],
+      country1: "India",
+      country2: "India"
     },
     {
       matchId: "C0003",
@@ -38,6 +42,8 @@ const allMatches = [
       team2Image: "/images/teams/eng-nat.png",
       timeRemaining: "1d 5h",
       type: matchType[0],
+      country1: "Australia",
+      country2: "England"
     },
     {
       matchId: "C0004",
@@ -49,6 +55,8 @@ const allMatches = [
       team2Image: "/images/teams/stars.png",
       timeRemaining: "4d 12h",
       type: matchType[0],
+      country1: "Australia",
+      country2: "Australia"
     },
     {
       matchId: "C0005",
@@ -60,6 +68,8 @@ const allMatches = [
       team2Image: "/images/teams/gaw.png",
       timeRemaining: "6d 8h",
       type: matchType[0],
+      country1: "West Indies",
+      country2: "West Indies"
     },
     {
       matchId: "C0006",
@@ -71,6 +81,8 @@ const allMatches = [
       team2Image: "/images/teams/gt.png",
       timeRemaining: "8d 18h",
       type: matchType[0],
+      country1: "India",
+      country2: "India"
     },
     
     // Football Matches
@@ -84,6 +96,8 @@ const allMatches = [
       team2Image: "/images/teams/liverpool.png",
       timeRemaining: "5h 20m",
       type: matchType[1],
+      country1: "England",
+      country2: "England"
     },
     {
       matchId: "F0002",
@@ -95,6 +109,8 @@ const allMatches = [
       team2Image: "/images/teams/barcelona.png",
       timeRemaining: "2d 4h",
       type: matchType[1],
+      country1: "Spain",
+      country2: "Spain"
     },
     {
       matchId: "F0003",
@@ -106,6 +122,8 @@ const allMatches = [
       team2Image: "/images/teams/acmilan.png",
       timeRemaining: "3d 6h",
       type: matchType[1],
+      country1: "Italy",
+      country2: "Italy"
     },
   
     // Basketball Matches
@@ -119,6 +137,8 @@ const allMatches = [
       team2Image: "/images/teams/heat.png",
       timeRemaining: "7h 15m",
       type: matchType[2],
+      country1: "USA",
+      country2: "USA"
     },
     {
       matchId: "N0002",
@@ -130,6 +150,8 @@ const allMatches = [
       team2Image: "/images/teams/realmadridbasketball.png",
       timeRemaining: "1d 8h",
       type: matchType[2],
+      country1: "Greece",
+      country2: "Spain"
     },
     {
       matchId: "N0003",
@@ -141,6 +163,8 @@ const allMatches = [
       team2Image: "/images/teams/sky.png",
       timeRemaining: "5d 4h",
       type: matchType[2],
+      country1: "USA",
+      country2: "USA"
     },
   
     // Kabaddi Matches
@@ -154,6 +178,8 @@ const allMatches = [
       team2Image: "/images/teams/bengal.png",
       timeRemaining: "2h 30m",
       type: matchType[3],
+      country1: "India",
+      country2: "India"
     },
     {
       matchId: "K0002",
@@ -165,6 +191,8 @@ const allMatches = [
       team2Image: "/images/teams/iran-kabaddi-nat.png",
       timeRemaining: "1d 10h",
       type: matchType[3],
+      country1: "India",
+      country2: "Iran"
     },
     {
       matchId: "K0003",
@@ -176,6 +204,8 @@ const allMatches = [
       team2Image: "/images/teams/japan-kabbadi-nat.png",
       timeRemaining: "4d 16h",
       type: matchType[3],
+      country1: "South Korea",
+      country2: "Japan"
     },
 ];
 
@@ -190,8 +220,15 @@ export default class MatchCardPropsList {
     match.team1Image,
     match.team2Image,
     match.timeRemaining,
-    match.type
+    match.type,
+    match.country1,
+    match.country2
   ));
+
+  // Add this method to find a match by matchId
+  static findByMatchId(matchId) {
+    return this.propsList.find(match => match.matchId === matchId);
+  }
 
   static getProps(index) {
     return this.propsList[index];

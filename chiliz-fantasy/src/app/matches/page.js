@@ -25,13 +25,14 @@ export default function MatchesPage() {
     <div className="p-8 bg-black text-white min-h-screen">
       <div className="relative">
         <div className="flex justify-around border-b border-gray-700 mb-8">
-          {tabs.map((tab) => (
+        {tabs.map((tab) => (
             <button
               key={tab.name}
-              className={`p-4 text-lg font-medium flex items-center space-x-2 transition-transform duration-300 ${
+              className={`p-4 text-lg font-medium flex items-center justify-center space-x-2 transition-transform duration-300 w-full ${
                 activeTab === tab.name ? "text-red-500 scale-110" : "hover:text-red-500"
               }`}
               onClick={() => setActiveTab(tab.name)}
+              style={{ flex: 1 }}  // Make each button take up equal space
             >
               {tab.icon}
               <span>{tab.name}</span>

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import "./MatchCard.css";
 
-export default function MatchCard({ matchId, matchName, matchDate, team1, team2, team1Image, team2Image, timeRemaining }) {
+export default function MatchCard({ matchId, matchName, matchDate, team1, team2, team1Image, team2Image, timeRemaining, country1, country2 }) {
   const [isActive, setIsActive] = useState(false);
   const router = useRouter(); // Initialize useRouter
 
@@ -20,6 +20,8 @@ export default function MatchCard({ matchId, matchName, matchDate, team1, team2,
       team1,
       team2,
       timeRemaining,
+      country1,
+      country2
     }).toString();
 
     // Navigate to TeamPage with query parameters
@@ -59,6 +61,8 @@ export default function MatchCard({ matchId, matchName, matchDate, team1, team2,
         <Image src={team2Image} alt={team2} width={64} height={64} />
       </div>
       <input type="hidden" id="MatchCardId" value={matchId} />
+      <input type="hidden" id="country1" value={country1} />
+      <input type="hidden" id="country1" value={country1} />
     </div>
   );
 }
