@@ -1,5 +1,5 @@
 // /src/app/page.js
-import Marketplace from '../pages/Marketplace'; // Adjust if necessary
+import Marketplace from './marketplace/page'; // Adjust if necessary
 
 const Page = () => {
   return <Marketplace />;

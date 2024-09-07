@@ -6,7 +6,7 @@ import GridLayout from 'react-grid-layout';
 import FantokenCard from "@/components/card/FantokenCard";
 import FantokenCardPropsList from "@/components/card/FantokenCardPropsList";
 
-import "../styles/pages/Marketplace.css";
+import "../../styles/pages/Marketplace.css";
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 

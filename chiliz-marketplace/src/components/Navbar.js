@@ -5,6 +5,9 @@ import { useState } from 'react';
 import Image from "next/image";
 import "../styles/components/navbar.css";
 import { CiSearch } from "react-icons/ci";
+import { ConnectButton } from "thirdweb/react";
+import { createThirdwebClient } from "thirdweb";
+import { getClientId } from "@/util/getContractAddress";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +15,12 @@ const Navbar = () => {
     const toggleMenu = () => {
       setIsOpen(!isOpen);
     };
-  
+
+    // Create the Thirdweb client
+    const client = createThirdwebClient({ 
+      clientId: getClientId(),
+    });
+
     return (
         <div className="navbar-body">
             {/* Left: Chilliz Logo */}
@@ -40,15 +48,22 @@ const Navbar = () => {
                 />
             </div>
 
-            {/* Right: Connect Wallet Button */}
-            <button className="connect-button navbar-item">
-                Connect Wallet
-            </button>
+            {/* Right: Connect Wallet Button (Thirdweb) */}
+            <div className="navbar-item">
+                <ConnectButton
+                className="connect-button"
+                    client={client}
+                    appMetadata={{
+                        name: "Chiliz Sports Market",
+                        url: "https://chilizsportsmarket.com",
+                    }}
+                />
+            </div>
 
             {/* Bottom: Gradient line */}
             <div className="gradient-line"></div>
         </div>
-  );
+    );
 };
 
 export default Navbar;

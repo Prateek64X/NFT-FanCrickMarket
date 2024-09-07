@@ -161,3 +161,20 @@
 .price-info, .listing-info {
     text-align: center;
 }
+
+.transaction-button {
+    background: linear-gradient(90deg, #610287, #212867); /* Ensure gradient is applied here */
+    color: white; /* White text */
+    padding: 12px 24px; /* Button padding */
+    border-radius: 8px; /* Rounded corners */
+    border: none; /* No border */
+    font-size: 14px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.transaction-button:hover {
+    background: linear-gradient(90deg, #a80da8, #3763c2); /* Different gradient for hover */
+    color: rgb(255, 255, 255); /* White text on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}

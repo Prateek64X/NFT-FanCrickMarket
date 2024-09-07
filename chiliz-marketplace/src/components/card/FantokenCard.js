@@ -40,7 +40,7 @@ function FantokenCard(props) {
             title, subtitle, img, rarity_value, rarity_type, skill, country, price_lowest, listing_count
         }).toString();
 
-        router.push(`/FantokenPage?${queryString}`);
+        router.push(`/fantoken?${queryString}`);
     };
 
     return (
