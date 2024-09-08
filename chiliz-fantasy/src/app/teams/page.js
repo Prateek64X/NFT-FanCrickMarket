@@ -7,13 +7,13 @@ import PlayerCard from "@/components/PlayerCard/PlayerCard";
 import PlayerCardPropsList from "@/components/PlayerCard/PlayerCardPropsList";
 import { TransactionButton, useReadContract, useActiveAccount } from "thirdweb/react";
 import { createThirdwebClient, getContract, defineChain, toEther } from "thirdweb";
-import { claimTo, getActiveClaimCondition, nextTokenIdToMint, getTotalClaimedSupply } from "thirdweb/extensions/erc721";
+import { claimTo, getActiveClaimCondition, getTotalClaimedSupply, nextTokenIdToMint } from "thirdweb/extensions/erc721";
 import { getClientId, getNFTContractAddress } from "@/util/getContractAddress";
 import "./page.css";
 
 export default function TeamPage() {
   const [selectedPlayers, setSelectedPlayers] = useState([]);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // Add state for button disabled
   const [quantity, setQuantity] = useState(1);
   const searchParams = useSearchParams();
   const matchId = searchParams.get("matchId");

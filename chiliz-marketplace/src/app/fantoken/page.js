@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
-import { ConnectButton, TransactionButton, useReadContract, useActiveAccount } from "thirdweb/react";
+import { TransactionButton, useReadContract, useActiveAccount } from "thirdweb/react";
 import { createThirdwebClient, getContract, defineChain, toEther } from "thirdweb";
 import { claimTo, getActiveClaimCondition, nextTokenIdToMint, getTotalClaimedSupply } from "thirdweb/extensions/erc721";
 import { getClientId, getNFTContractAddress } from "@/util/getContractAddress";
@@ -11,7 +11,6 @@ import "../../styles/pages/fantoken-page.css";
 
 export default function FantokenPage() {
     const [quantity, setQuantity] = useState(1);
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const searchParams = useSearchParams();
     const title = searchParams.get('title');
     const subtitle = searchParams.get('subtitle');
@@ -20,9 +19,12 @@ export default function FantokenPage() {
     const listing_count = searchParams.get('listing_count');
 
     // Initialize Thirdweb client and contract
-    const client = createThirdwebClient({ clientId: getClientId() });
-    const contract = getContract({
-        client,
+    const client = createThirdwebClient({ 
+        clientId: getClientId(),
+    });
+
+    const contract = getContract({ 
+        client, 
         chain: defineChain(88882),
         address: getNFTContractAddress(),
     });
@@ -30,15 +32,15 @@ export default function FantokenPage() {
     // Fetch contract data
     const { data: claimCondition, isLoading: isLoadingClaimCondition } = useReadContract(getActiveClaimCondition, {
         contract: contract,
-      });
-    
-      const { data: totalNFTSupply, isLoading: isTotalSupplyLoading } = useReadContract(nextTokenIdToMint, {
+    });
+
+    const { data: totalNFTSupply, isLoading: isTotalSupplyLoading } = useReadContract(nextTokenIdToMint, {
         contract: contract,
-      });
-    
-      const { data: claimedSupply, isLoading: isClaimedSupplyLoading } = useReadContract(getTotalClaimedSupply, {
+    });
+
+    const { data: claimedSupply, isLoading: isClaimedSupplyLoading } = useReadContract(getTotalClaimedSupply, {
         contract: contract,
-      });
+    });
 
     const account = useActiveAccount();
 
@@ -46,11 +48,6 @@ export default function FantokenPage() {
         const total = quantity * parseInt(claimCondition?.pricePerToken.toString() || "0");
         return toEther(BigInt(total));
     };
-
-    useEffect(() => {
-        // Enable the button if claim condition is loaded
-        setIsButtonDisabled(!claimCondition);
-    }, [claimCondition]);
 
     return (
         <div className='main'>
@@ -82,33 +79,33 @@ export default function FantokenPage() {
                             <span>Listings</span>
                             <p>{listing_count}</p>
                         </div>
+                    {/* Connect Button */}
+                    <div style={{ marginBottom: "16px" }}></div>
+                    
+                    {/* Replace Select and Buy Button with Transaction Button */}
+                    {claimCondition ? (
+                        <TransactionButton
+                        className="transaction-button"
+                        transaction={() => claimTo({
+                            contract: contract,
+                            to: account?.address || "", // Ensure this is the user's address
+                            quantity: BigInt(quantity),
+                        })}
+                        onTransactionConfirmed={() => {
+                            setQuantity(1);
+                            alert("NFT claimed!");
+                        }}
+                        disabled={!claimCondition || !account} // Ensure the button is only enabled when conditions are met
+                    >
+                        {`Claim NFT (${getNFTPrice(quantity)} ETH)`}
+                    </TransactionButton>
+                    
+                    ) : (
+                        <p>Loading claim condition...</p>
+                    )}
 
-                        {/* Connect Button */}
-                        <ConnectButton />
-
-                        {/* Transaction Button */}
-                        {claimCondition ? (
-                            <TransactionButton
-                                className={`transaction-button ${isButtonDisabled ? 'disabled' : 'active'}`}
-                                transaction={() => claimTo({
-                                    contract: contract,
-                                    to: account?.address || "", // User's address
-                                    quantity: BigInt(quantity),
-                                })}
-                                onTransactionConfirmed={() => {
-                                    setQuantity(1);
-                                    alert("NFT claimed!");
-                                }}
-                                disabled={isButtonDisabled || !account} // Disable if not logged in or conditions not met
-                            >
-                                {`Claim NFT (${getNFTPrice(quantity)} ETH)`}
-                            </TransactionButton>
-                        ) : (
-                            <p>Loading claim condition...</p>
-                        )}
-
-                        {/* Quantity Selector */}
-                        <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+                    {/* Quantity Selector */}
+                    <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
                     </div>
                 </div>
             </div>
