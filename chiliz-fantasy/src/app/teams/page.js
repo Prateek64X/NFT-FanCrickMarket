@@ -1,20 +1,63 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GridLayout from 'react-grid-layout';
 import { useSearchParams } from "next/navigation";
 import PlayerCard from "@/components/PlayerCard/PlayerCard";
 import PlayerCardPropsList from "@/components/PlayerCard/PlayerCardPropsList";
-import MatchCardPropsList from "@/components/MatchCard/MatchCardPropsList";
+import { TransactionButton, useReadContract } from "thirdweb/react";
+import { createThirdwebClient, getContract, defineChain, toEther } from "thirdweb";
+import { claimTo, getActiveClaimCondition } from "thirdweb/extensions/erc721";
+import { getClientId, getNFTContractAddress } from "@/util/getContractAddress";
 import "./page.css";
 
 export default function TeamPage() {
   const [selectedPlayers, setSelectedPlayers] = useState([]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // Add state for button disabled
+  const [quantity, setQuantity] = useState(1);
+  const searchParams = useSearchParams();
+  const matchId = searchParams.get("matchId");
+  const matchName = searchParams.get("matchName");
+  const team1 = searchParams.get("team1");
+  const team2 = searchParams.get("team2");
+
+  // Thirdweb setup
+  const client = createThirdwebClient({ clientId: getClientId() });
+  const contract = getContract({
+    client,
+    chain: defineChain(88882), // Use the appropriate chain ID
+    address: getNFTContractAddress(),
+  });
+
+  const { data: claimCondition, isLoading: isLoadingClaimCondition } = useReadContract(getActiveClaimCondition, {
+    contract: contract,
+  });
+
+  const getNFTPrice = (quantity) => {
+    const total = quantity * parseInt(claimCondition?.pricePerToken.toString() || "0");
+    return toEther(BigInt(total));
+  };
+
+  const handleSelectPlayer = (playerId) => {
+    setSelectedPlayers((prevSelectedPlayers) => {
+      if (prevSelectedPlayers.includes(playerId)) {
+        return prevSelectedPlayers.filter(id => id !== playerId);
+      } else {
+        return [...prevSelectedPlayers, playerId];
+      }
+    });
+  };
+
+  // Update the button disabled state based on selected players
+  useEffect(() => {
+    const maxPlayers = 4;
+    const selectedCount = selectedPlayers.length;
+    setIsButtonDisabled(selectedCount < maxPlayers / 2); // Disable the button if selected players are less than half
+  }, [selectedPlayers]);
 
   const columns = 5;
   const cardWidth = 440;
   const cardHeight = 620;
-
   const layoutConfig = PlayerCardPropsList.propsList.map((_, index) => ({
     i: `card-${index}`,
     x: index % columns,
@@ -23,35 +66,10 @@ export default function TeamPage() {
     h: 1
   }));
 
-  const searchParams = useSearchParams();
-  const matchId = searchParams.get("matchId");
-  const matchName = searchParams.get("matchName");
-  const team1 = searchParams.get("team1");
-  const team2 = searchParams.get("team2");
-  
-  const match = MatchCardPropsList.findByMatchId(matchId);
-  const country1 = match?.country1.toLowerCase();
-  const country2 = match?.country2.toLowerCase();
-
   const filteredPropsList = PlayerCardPropsList.propsList.filter(props => {
     const cardCountry = props.country.toLowerCase();
-    return cardCountry === country1 || cardCountry === country2;
+    return cardCountry === team1.toLowerCase() || cardCountry === team2.toLowerCase();
   });
-
-  const handleSelectPlayer = (playerId) => {
-    setSelectedPlayers((prevSelectedPlayers) => {
-      if (prevSelectedPlayers.includes(playerId)) {
-        const updatedSelection = prevSelectedPlayers.filter(id => id !== playerId);
-        return updatedSelection;
-      } else {
-        const updatedSelection = [...prevSelectedPlayers, playerId];
-        return updatedSelection;
-      }
-    });
-  };
-  
-  const selectedCount = selectedPlayers.length;
-  const maxPlayers = 4;
 
   return (
     <div className="team-page">
@@ -66,9 +84,26 @@ export default function TeamPage() {
           <div className="grid-item"><span>{matchName} team</span></div>
           <div className="grid-item"><span>{team1} vs {team2}</span></div>
           <div className="grid-item">
-            <button className="connect-button navbar-item">
-                Complete Purchase
-            </button>
+            {/* Transaction Button */}
+            {claimCondition ? (
+              <TransactionButton
+                className={`transaction-button ${isButtonDisabled ? 'disabled' : 'active'}`} // Dynamically switch class
+                transaction={() => claimTo({
+                  contract: contract,
+                  to: getNFTContractAddress(),
+                  quantity: BigInt(quantity),
+                })}
+                onTransactionConfirmed={() => {
+                  setQuantity({selectedCount});
+                  alert("NFT claimed!");
+                }}
+                disabled={isButtonDisabled} // Keep it disabled in terms of interaction
+              >
+                {`Claim NFT (${getNFTPrice(quantity)} ETH)`}
+              </TransactionButton>
+            ) : (
+              <p>Loading claim condition...</p>
+            )}
           </div>
         </div>
 
@@ -78,7 +113,7 @@ export default function TeamPage() {
           <div className="grid-item"><h3>Contest Pool</h3></div>
         </div>
         <div className="grid-item-row-3">
-          <div className="grid-item text-gradient text-heading-24"><span>{`${selectedCount}/${maxPlayers}`}</span></div>
+          <div className="grid-item text-gradient text-heading-24"><span>{`${selectedPlayers.length}/4`}</span></div>
           <div className="grid-item"><span>Super Shot</span></div>
           <div className="grid-item"><span>$200000</span></div>
         </div>
@@ -98,11 +133,10 @@ export default function TeamPage() {
                   {...props} 
                   matchId={matchId} 
                   onSelect={handleSelectPlayer} 
-                  selected={selectedPlayers.includes(props.playerId)} // Check if the player is in the selectedPlayers array
+                  selected={selectedPlayers.includes(props.playerId)}
                 />
               </div>
             ))}
-
           </GridLayout>
         </section>
       </div>

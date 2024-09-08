@@ -163,18 +163,21 @@
 }
 
 .transaction-button {
-    background: linear-gradient(90deg, #610287, #212867); /* Ensure gradient is applied here */
-    color: white; /* White text */
-    padding: 12px 24px; /* Button padding */
-    border-radius: 8px; /* Rounded corners */
-    border: none; /* No border */
-    font-size: 14px; /* Font size */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-}
-
-.transaction-button:hover {
-    background: linear-gradient(90deg, #a80da8, #3763c2); /* Different gradient for hover */
-    color: rgb(255, 255, 255); /* White text on hover */
-    transform: scale(1.05); /* Slightly enlarge the button on hover */
-}
+    all: unset; /* Reset all inherited styles */
+    background: linear-gradient(90deg, #610287, #212867) !important; /* Force gradient background */
+    color: white !important; /* White text */
+    padding: 12px 24px !important; /* Padding for button */
+    border-radius: 50px !important; /* Semi-circle border radius */
+    border: none !important; /* No border */
+    font-size: 14px !important; /* Font size */
+    cursor: pointer !important; /* Pointer cursor on hover */
+    display: inline-block; /* Ensure it's treated as a button */
+    transition: background 0.3s ease, transform 0.3s ease !important; /* Smooth transition for background and scale */
+  }
+  
+  .transaction-button:hover {
+    background: linear-gradient(90deg, #a80da8, #3763c2) !important; /* Different gradient for hover */
+    color: white !important; /* White text on hover */
+    transform: scale(1.05) !important; /* Slight enlarge effect on hover */
+  }
+  

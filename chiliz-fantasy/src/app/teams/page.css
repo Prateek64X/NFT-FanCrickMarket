@@ -71,3 +71,28 @@
 .text-heading-24 span {
   font-size: 24pt;
 }
+
+
+.transaction-button {
+  all: unset;
+  background: linear-gradient(90deg, #610287, #212867) !important;
+  color: white !important;
+  padding: 12px 24px !important;
+  border-radius: 50px !important;
+  border: none !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  display: inline-block;
+  transition: background 0.3s ease, transform 0.3s ease !important;
+}
+
+.transaction-button.active:hover {
+  background: linear-gradient(90deg, #a80da8, #3763c2) !important;
+  transform: scale(1.05) !important;
+}
+
+.transaction-button.disabled {
+  background: gray !important;
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}

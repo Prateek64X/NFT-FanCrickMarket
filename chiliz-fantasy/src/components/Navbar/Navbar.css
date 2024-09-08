@@ -94,7 +94,7 @@
 }
 
 .connect-button:hover {
-    filter: brightness(150%);
+    filter: brightness(75%);
 }
 
 .gradient-line {
@@ -110,13 +110,22 @@
     margin-left: 8pt;
     margin-right: 8pt;
     background: linear-gradient(to right, #FF1256, #610287);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    -webkit-background-clip: text; /* Clipping the background to the text */
+    -webkit-text-fill-color: transparent; /* Ensures text fill is transparent */
+    background-clip: text; /* For non-webkit browsers */
+    text-fill-color: transparent; /* Non-webkit version of text-fill */
     font-family: 'Raleway', Arial, Helvetica, sans-serif;
     font-size: 24px;
     font-weight: 600;
+    transition: background 0.3s ease; /* Smooth transition for hover */
 }
+
+.text-gradient:hover {
+    background: linear-gradient(to right, #ee4864, #c519c5); /* New gradient on hover */
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
 
 .centered-content {
     display: flex;
