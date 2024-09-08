@@ -35,9 +35,9 @@ export default function Marketplace() {
             className="grid-layout"
             layout={layoutConfig}
             cols={6} // Number of columns
-            rowHeight={cardHeight / 1} // Adjust to match the height
-            width={5 * cardWidth} // Total width based on number of columns
-            isDraggable={false} // Disable dragging
+            rowHeight={cardHeight / 1}
+            width={5 * cardWidth}
+            isDraggable={false}
           >
             <div key="card-0" style={{ width: cardWidth, height: cardHeight }}>
               <FantokenCard 

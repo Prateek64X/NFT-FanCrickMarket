@@ -73,7 +73,7 @@ const Navbar = () => {
                 className="connect-button"
                     client={client}
                     appMetadata={{
-                        name: "Chiliz Sports Market",
+                        name: "Chiliz Fanverse Market",
                         url: "https://chilizsportsmarket.com",
                     }}
                 />

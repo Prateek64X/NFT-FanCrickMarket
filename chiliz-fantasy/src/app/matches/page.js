@@ -50,7 +50,9 @@ export default function MatchesPage() {
       <section className="mb-8">
         <h2 className="text-2xl font-bold mb-4">Featured</h2>
         <div className="flex space-x-4">
-          <Image src="/images/featured.png" alt="Featured Match" width={300} height={200} className="rounded-md shadow-lg" />
+          <Image src="/images/featured.png" alt="Featured Match" width={600} height={400} className="rounded-md shadow-lg" />
+          <Image src="/images/featured2.png" alt="Featured Match" width={600} height={400} className="rounded-md shadow-lg" />
+          <Image src="/images/featured3.png" alt="Featured Match" width={600} height={400} className="rounded-md shadow-lg" />
           {/* Add more featured cards if needed */}
         </div>
       </section>

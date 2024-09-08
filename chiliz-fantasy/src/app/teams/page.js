@@ -5,15 +5,15 @@ import GridLayout from 'react-grid-layout';
 import { useSearchParams } from "next/navigation";
 import PlayerCard from "@/components/PlayerCard/PlayerCard";
 import PlayerCardPropsList from "@/components/PlayerCard/PlayerCardPropsList";
-import { TransactionButton, useReadContract } from "thirdweb/react";
+import { TransactionButton, useReadContract, useActiveAccount } from "thirdweb/react";
 import { createThirdwebClient, getContract, defineChain, toEther } from "thirdweb";
-import { claimTo, getActiveClaimCondition } from "thirdweb/extensions/erc721";
+import { claimTo, getActiveClaimCondition, nextTokenIdToMint, getTotalClaimedSupply } from "thirdweb/extensions/erc721";
 import { getClientId, getNFTContractAddress } from "@/util/getContractAddress";
 import "./page.css";
 
 export default function TeamPage() {
   const [selectedPlayers, setSelectedPlayers] = useState([]);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // Add state for button disabled
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const searchParams = useSearchParams();
   const matchId = searchParams.get("matchId");
@@ -29,10 +29,22 @@ export default function TeamPage() {
     address: getNFTContractAddress(),
   });
 
+  // Fetch NFT Metadata
   const { data: claimCondition, isLoading: isLoadingClaimCondition } = useReadContract(getActiveClaimCondition, {
     contract: contract,
   });
 
+  const { data: totalNFTSupply, isLoading: isTotalSupplyLoading } = useReadContract(nextTokenIdToMint, {
+    contract: contract,
+  });
+
+  const { data: claimedSupply, isLoading: isClaimedSupplyLoading } = useReadContract(getTotalClaimedSupply, {
+    contract: contract,
+  });
+  
+  const account = useActiveAccount();
+
+  // Calculate NFT price based on quantity
   const getNFTPrice = (quantity) => {
     const total = quantity * parseInt(claimCondition?.pricePerToken.toString() || "0");
     return toEther(BigInt(total));
@@ -53,7 +65,11 @@ export default function TeamPage() {
     const maxPlayers = 4;
     const selectedCount = selectedPlayers.length;
     setIsButtonDisabled(selectedCount < maxPlayers / 2); // Disable the button if selected players are less than half
+
+    // Set the quantity based on the selected players
+    setQuantity(selectedCount); // Set quantity to the number of selected players
   }, [selectedPlayers]);
+
 
   const columns = 5;
   const cardWidth = 440;
@@ -87,17 +103,17 @@ export default function TeamPage() {
             {/* Transaction Button */}
             {claimCondition ? (
               <TransactionButton
-                className={`transaction-button ${isButtonDisabled ? 'disabled' : 'active'}`} // Dynamically switch class
+                className={`transaction-button ${isButtonDisabled ? 'disabled' : 'active'}`}
                 transaction={() => claimTo({
                   contract: contract,
-                  to: getNFTContractAddress(),
+                  to: account?.address || "", // Ensure the correct address is used
                   quantity: BigInt(quantity),
                 })}
                 onTransactionConfirmed={() => {
-                  setQuantity({selectedCount});
                   alert("NFT claimed!");
+                  setQuantity(1); // Reset quantity after successful transaction
                 }}
-                disabled={isButtonDisabled} // Keep it disabled in terms of interaction
+                disabled={isButtonDisabled || !account}
               >
                 {`Claim NFT (${getNFTPrice(quantity)} ETH)`}
               </TransactionButton>
